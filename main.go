@@ -16,8 +16,7 @@ import (
 var (
 	version = "dev"
 	appName = fmt.Sprintf("oura-to-runalyze/%s", version)
-	start string
-	end string
+	start, end string
 	yesterday bool
 )
 
