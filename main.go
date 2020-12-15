@@ -12,6 +12,9 @@ import (
 	"golang.org/x/oauth2"
 )
 
+
+const appName = "oura-to-runalyze/dev"
+
 func main() {
 	godotenv.Load(".env")
 	yesterday := time.Now().AddDate(0, 0, -1).Format("2006-01-02")
@@ -57,7 +60,7 @@ func getOuraSleep(start string, end string) ([]oura.Sleep, error) {
 	ts := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: os.Getenv("OURA_ACCESS_TOKEN")})
 	ctx := context.Background()
 	tc := oauth2.NewClient(ctx, ts)
-	cl := oura.NewClient(tc)
+	cl := oura.NewClient(tc, appName)
 	sleep, _, err := cl.GetSleep(ctx, start, end)
 
 	return sleep.Sleeps, err
@@ -65,7 +68,11 @@ func getOuraSleep(start string, end string) ([]oura.Sleep, error) {
 
 func upLoadMetricsToRunAlyze(m runalyze.Metrics) error {
 	ctx := context.Background()
-	cl := runalyze.NewClient(nil, os.Getenv("RUNALYZE_ACCESS_TOKEN"))
+	cfg := runalyze.Configuration{
+		Token: os.Getenv("RUNALYZE_ACCESS_TOKEN"),
+		AppName: appName,
+	}
+	cl := runalyze.NewClient(cfg)
 	_, err := cl.CreateMetrics(ctx, m)
 	return err
 }
