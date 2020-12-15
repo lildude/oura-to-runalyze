@@ -12,8 +12,10 @@ import (
 	"golang.org/x/oauth2"
 )
 
-
-const appName = "oura-to-runalyze/dev"
+var (
+	version = "dev"
+	appName = fmt.Sprintf("oura-to-runalyze/%s", version)
+)
 
 func main() {
 	godotenv.Load(".env")
