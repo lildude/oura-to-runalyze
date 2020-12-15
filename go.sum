@@ -108,10 +108,10 @@ github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORN
 github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=
 github.com/kr/text v0.1.0 h1:45sCR5RtlFHMR4UwH9sdQ5TC8v0qDQCHnXt+kaKSTVE=
 github.com/kr/text v0.1.0/go.mod h1:4Jbv+DJW3UT/LiOwJeYQe1efqtUx/iVham/4vfdArNI=
-github.com/lildude/oura v0.0.0-20201212095100-bdde3296d2ba h1:18kveaB9uoDAImHV1C14++74mwpbvyJ6AwLuJrdx+Ts=
-github.com/lildude/oura v0.0.0-20201212095100-bdde3296d2ba/go.mod h1:hfbIdn1Tc23T1kT1setJcW+adhoViAzVgi1wroKPcDA=
-github.com/lildude/runalyze v0.0.0-20201214161722-94bdf3c4b017 h1:Y145cyMmy8npt5t7v2EqO90EpEXHxWnA8NiYoRc0o1o=
-github.com/lildude/runalyze v0.0.0-20201214161722-94bdf3c4b017/go.mod h1:Ws3UWALwblcIzgeb+unbUIrxTQ/8BkE6s94K4VoYT4A=
+github.com/lildude/oura v0.0.0-20201215145250-cf2446f9f61f h1:dXE34QHO5SY52d4xOa56xRFFAgb5SCXaqpNmXRq0nLM=
+github.com/lildude/oura v0.0.0-20201215145250-cf2446f9f61f/go.mod h1:hfbIdn1Tc23T1kT1setJcW+adhoViAzVgi1wroKPcDA=
+github.com/lildude/runalyze v0.0.0-20201215145245-ed0d36d9f89e h1:4wq5w98im5rj49ABMEDYNuCRue2A43RrwzFoMgdWJOw=
+github.com/lildude/runalyze v0.0.0-20201215145245-ed0d36d9f89e/go.mod h1:Ws3UWALwblcIzgeb+unbUIrxTQ/8BkE6s94K4VoYT4A=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
