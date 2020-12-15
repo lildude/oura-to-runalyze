@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"os"
 	"time"
@@ -15,12 +16,24 @@ import (
 var (
 	version = "dev"
 	appName = fmt.Sprintf("oura-to-runalyze/%s", version)
+	start string
+	end string
+	yesterday bool
 )
 
 func main() {
 	godotenv.Load(".env")
-	yesterday := time.Now().AddDate(0, 0, -1).Format("2006-01-02")
-	sleeps, err := getOuraSleep(yesterday, "")
+	flag.StringVar(&start, "start", "", "Start date in the format: YYYY-MM-DD. If not provided, defaults to Oura's default of one week ago.")
+	flag.StringVar(&end, "end", "", "End date in the form: YYYY-MM-DD. If not provided, defaults to Oura's default of today.")
+	flag.BoolVar(&yesterday, "yesterday", false, "Use yesterday's date as the start date.")
+	flag.Parse()
+
+	if yesterday {
+		start = time.Now().AddDate(0, 0, -1).Format("2006-01-02")
+	}
+
+	sleeps, err := getOuraSleep(start, end)
+
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Problem getting sleep from Oura: %v\n", err)
 		os.Exit(1)
