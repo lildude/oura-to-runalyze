@@ -15,10 +15,10 @@ import (
 )
 
 var (
-	version = "dev"
-	appName = fmt.Sprintf("oura-to-runalyze/%s", version)
-	start, end string
-	yesterday bool
+	version    = "dev"
+	appName    = fmt.Sprintf("oura-to-runalyze/%s", version)
+	commit, start, end string
+	yesterday  bool
 )
 
 func main() {
@@ -26,7 +26,13 @@ func main() {
 	flag.StringVar(&start, "start", "", "Start date in the format: YYYY-MM-DD. If not provided, defaults to Oura's default of one week ago.")
 	flag.StringVar(&end, "end", "", "End date in the form: YYYY-MM-DD. If not provided, defaults to Oura's default of today.")
 	flag.BoolVar(&yesterday, "yesterday", false, "Use yesterday's date as the start date.")
+	ver := flag.Bool("version", false, "Print the version and exit.")
 	flag.Parse()
+
+	if *ver {
+		fmt.Printf("oura-to-runalyze %s (commit: %s)", version, commit)
+		os.Exit(0)
+	}
 
 	if yesterday {
 		start = time.Now().AddDate(0, 0, -1).Format("2006-01-02")
