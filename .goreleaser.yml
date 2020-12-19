@@ -1,0 +1,38 @@
+before:
+  hooks:
+    - go mod download
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch: # Defaults are 386 and amd64.
+      - amd64
+      - arm64
+    goarm: # Default is only 6.
+      - 6
+      - 7
+    ldflags: # Default is `-s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}} -X main.builtBy=goreleaser`.
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}}
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      amd64: x86_64
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}.{{ .ShortCommit }}"
+changelog:
+  sort: asc
+  skip: false
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - typo
+release:
+  draft: true
