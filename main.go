@@ -34,6 +34,16 @@ func main() {
 		os.Exit(0)
 	}
 
+	if _, ok := os.LookupEnv("OURA_ACCESS_TOKEN"); !ok {
+		fmt.Printf("%s not set\n", "OURA_ACCESS_TOKEN")
+		os.Exit(1)
+	}
+
+	if _, ok := os.LookupEnv("RUNALYZE_ACCESS_TOKEN"); !ok {
+		fmt.Printf("%s not set\n", "RUNALYZE_ACCESS_TOKEN")
+		os.Exit(1)
+	}
+
 	if yesterday {
 		start = time.Now().AddDate(0, 0, -1).Format("2006-01-02")
 	}
