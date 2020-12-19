@@ -31,13 +31,23 @@ func main() {
 		start = time.Now().AddDate(0, 0, -1).Format("2006-01-02")
 	}
 
-	sleeps, err := getOuraSleep(start, end)
-
+	ouraClient := newOuraClient()
+	sleeps, err := getOuraSleep(ouraClient, start, end)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Problem getting sleep from Oura: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Problem uploading metrics to Runalyze: %v\n", err)
 		os.Exit(1)
 	}
+	metrics := createMetrics(*sleeps)
 
+	runalyzeClient := newRunalyzeClient()
+	if err := upLoadMetricsToRunAlyze(runalyzeClient, metrics); err != nil {
+		fmt.Fprintf(os.Stderr, "Problem uploading metrics to Runalyze: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Println("Successfully sync'd to Runalyze")
+}
+
+func createMetrics(sleeps []oura.Sleep) runalyze.Metrics {
 	var sleep []runalyze.Sleep
 	var hrRest []runalyze.HeartRateRest
 
@@ -63,39 +73,45 @@ func main() {
 		Sleep:         sleep,
 	}
 
-	if err = upLoadMetricsToRunAlyze(metrics); err != nil {
-		fmt.Fprintf(os.Stderr, "Problem uploading metrics to Runalyze: %s\n", err.Error())
-		os.Exit(1)
-	}
-	fmt.Println("Successfully sync'd to Runalyze")
+	return metrics
 }
 
-func getOuraSleep(start string, end string) ([]oura.Sleep, error) {
+type ouraClient interface {
+	GetSleep(ctx context.Context, start, end string) (*oura.Sleeps, *http.Response, error)
+}
+
+func newOuraClient() *oura.Client {
 	ts := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: os.Getenv("OURA_ACCESS_TOKEN")})
-	ctx := context.Background()
-	tc := oauth2.NewClient(ctx, ts)
-	cl := oura.NewClient(tc, appName)
-	sleep, _, err := cl.GetSleep(ctx, start, end)
-
-	return sleep.Sleeps, err
+	tc := oauth2.NewClient(context.Background(), ts)
+	cl := *oura.NewClient(tc, appName)
+	return &cl
 }
 
-func upLoadMetricsToRunAlyze(m runalyze.Metrics) error {
-	ctx := context.Background()
-	cfg := runalyze.Configuration{
-		Token: os.Getenv("RUNALYZE_ACCESS_TOKEN"),
+func getOuraSleep(client ouraClient, start string, end string) (*[]oura.Sleep, error) {
+	sleep, _, err := client.GetSleep(context.Background(), start, end)
+	return &sleep.Sleeps, err
+}
+
+type runalyzeClient interface {
+	CreateMetrics(ctx context.Context, metrics runalyze.Metrics) (*http.Response, error)
+}
+
+func newRunalyzeClient() *runalyze.Client {
+	cfg := &runalyze.Configuration{
+		Token:   os.Getenv("RUNALYZE_ACCESS_TOKEN"),
 		AppName: appName,
 	}
-	cl := runalyze.NewClient(cfg)
-	_, err := cl.CreateMetrics(ctx, m)
+	cl := *runalyze.NewClient(*cfg)
+	return &cl
+}
+
+func upLoadMetricsToRunAlyze(client runalyzeClient, metrics runalyze.Metrics) error {
+	_, err := client.CreateMetrics(context.Background(), metrics)
 	return err
 }
 
+
 func secToMin(sec int) int {
-	min, err := time.ParseDuration(fmt.Sprintf("%ds", sec))
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "error: %v\n", err)
-		os.Exit(1)
-	}
+	min, _ := time.ParseDuration(fmt.Sprintf("%ds", sec))
 	return int(min.Minutes() + 0.5)
 }
