@@ -121,31 +121,31 @@ func Test_createMetrics(t *testing.T) {
 	sleeps := []oura.Sleep{
 		{
 			BedtimeStart: time.Date(2017, 11, 6, 2, 13, 19, 0, time.UTC),
-			BedtimeEnd: time.Date(2017, 11, 6, 8, 12, 19, 0, time.UTC),
-			Total: 20310,
-			Rem: 7140,
-			Light: 10260,
-			Deep: 2910,
-			Awake: 1230,
-			Score: 85,
-			HrLowest: 49,
+			BedtimeEnd:   time.Date(2017, 11, 6, 8, 12, 19, 0, time.UTC),
+			Total:        20310,
+			Rem:          7140,
+			Light:        10260,
+			Deep:         2910,
+			Awake:        1230,
+			Score:        85,
+			HrLowest:     49,
 		},
 	}
 	want := runalyze.Metrics{
 		Sleep: []runalyze.Sleep{
 			{
-				DateTime: time.Date(2017, 11, 6, 2, 13, 19, 0, time.UTC),
-				Duration: 339,
-				RemDuration: 119,
+				DateTime:           time.Date(2017, 11, 6, 2, 13, 19, 0, time.UTC),
+				Duration:           339,
+				RemDuration:        119,
 				LightSleepDuration: 171,
-				DeepSleepDuration: 49,
-				AwakeDuration: 21,
-				Quality: 8,
+				DeepSleepDuration:  49,
+				AwakeDuration:      21,
+				Quality:            8,
 			},
 		},
 		HeartRateRest: []runalyze.HeartRateRest{
 			{
-				DateTime: time.Date(2017, 11, 6, 8, 12, 19, 0, time.UTC),
+				DateTime:  time.Date(2017, 11, 6, 8, 12, 19, 0, time.UTC),
 				HeartRate: 49,
 			},
 		},

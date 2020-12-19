@@ -15,10 +15,10 @@ import (
 )
 
 var (
-	version    = "dev"
-	appName    = fmt.Sprintf("oura-to-runalyze/%s", version)
+	version            = "dev"
+	appName            = fmt.Sprintf("oura-to-runalyze/%s", version)
 	commit, start, end string
-	yesterday  bool
+	yesterday          bool
 )
 
 func main() {
@@ -126,7 +126,6 @@ func upLoadMetricsToRunAlyze(client runalyzeClient, metrics runalyze.Metrics) er
 	_, err := client.CreateMetrics(context.Background(), metrics)
 	return err
 }
-
 
 func secToMin(sec int) int {
 	min, _ := time.ParseDuration(fmt.Sprintf("%ds", sec))
