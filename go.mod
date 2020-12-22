@@ -1,3 +1,4 @@
+// +heroku goVersion go1.15
 module github.com/lildude/oura-to-runalyze
 
 go 1.15
