@@ -54,7 +54,7 @@ func (m *mockOuraClient) GetSleep(ctx context.Context, start, end string) (*oura
 }
 
 func Test_newOuraClient(t *testing.T) {
-	want := oura.NewClient(nil, appName).UserAgent
+	want := oura.NewClient(nil).UserAgent
 	got := newOuraClient().UserAgent
 	if diff := cmp.Diff(want, got); diff != "" {
 		t.Errorf("newOuraClient() mismatch (-want +got):\n%s", diff)
@@ -80,7 +80,7 @@ func (m *mockRunalyzeClient) CreateMetrics(ctx context.Context, metrics runalyze
 }
 
 func Test_newRunalyzeClient(t *testing.T) {
-	want := runalyze.NewClient(runalyze.Configuration{AppName: appName, Token: "12345"}).UserAgent
+	want := runalyze.NewClient("12345").UserAgent
 	got := newRunalyzeClient().UserAgent
 	if diff := cmp.Diff(want, got); diff != "" {
 		t.Errorf("newRunalyzeClient() mismatch (-want +got):\n%s", diff)

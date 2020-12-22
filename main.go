@@ -16,7 +16,6 @@ import (
 
 var (
 	version            = "dev"
-	appName            = fmt.Sprintf("oura-to-runalyze/%s", version)
 	commit, start, end string
 	yesterday          bool
 )
@@ -100,7 +99,7 @@ type ouraClient interface {
 func newOuraClient() *oura.Client {
 	ts := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: os.Getenv("OURA_ACCESS_TOKEN")})
 	tc := oauth2.NewClient(context.Background(), ts)
-	cl := *oura.NewClient(tc, appName)
+	cl := *oura.NewClient(tc)
 	return &cl
 }
 
@@ -114,11 +113,7 @@ type runalyzeClient interface {
 }
 
 func newRunalyzeClient() *runalyze.Client {
-	cfg := &runalyze.Configuration{
-		Token:   os.Getenv("RUNALYZE_ACCESS_TOKEN"),
-		AppName: appName,
-	}
-	cl := *runalyze.NewClient(*cfg)
+	cl := *runalyze.NewClient(os.Getenv("RUNALYZE_ACCESS_TOKEN"))
 	return &cl
 }
 
