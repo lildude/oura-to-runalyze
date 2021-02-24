@@ -34,5 +34,6 @@ changelog:
       - '^docs:'
       - '^test:'
       - typo
+      - '^Merge pull request'
 release:
   draft: true
