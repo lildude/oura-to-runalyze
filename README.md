@@ -3,6 +3,8 @@
 ![Tests Status Badge](https://github.com/lildude/oura-to-runalyze/workflows/Tests/badge.svg)
 
 Sync health data from Oura to Runalyze.
+Currently only sleep data and resting heart rate as this normally lowest during sleep.
+The Runalyze Sleep Quality metric is calculated by taking the Oura Sleep Score, dividing by 10 and rounding down.
 
 ## Installation
 
@@ -56,3 +58,7 @@ $ oura-to-runalyze -start 2020-01-01 -end 2020-03-31
 Successfully sync'd to Runalyze
 $
 ```
+
+## Releasing
+
+This project uses [GoReleaser](https://goreleaser.com) via GitHub Actions to make the releases quick and easy. When I'm ready for a new release, I push a new tag and the workflow takes care of things.

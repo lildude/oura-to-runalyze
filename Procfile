@@ -1,0 +1,1 @@
+worker: bin/oura-to-runalyze -yesterday

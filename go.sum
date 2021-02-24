@@ -132,6 +132,8 @@ github.com/lildude/runalyze v0.1.0 h1:voeK42Jy+8mQRRnPU8YKFXwmMkULeacq2gZTMiTZ9B
 github.com/lildude/runalyze v0.1.0/go.mod h1:Ws3UWALwblcIzgeb+unbUIrxTQ/8BkE6s94K4VoYT4A=
 github.com/lildude/runalyze v0.2.0 h1:OoLflq+7F6i5OSYOXGwL1W01kfAG0SoeZ0huS8QkpM4=
 github.com/lildude/runalyze v0.2.0/go.mod h1:Ws3UWALwblcIzgeb+unbUIrxTQ/8BkE6s94K4VoYT4A=
+github.com/lildude/runalyze v0.2.1 h1:a5KYofmb9mc6RPUe0LELGFatxXRrbdIyvLJi1ka78GA=
+github.com/lildude/runalyze v0.2.1/go.mod h1:Ws3UWALwblcIzgeb+unbUIrxTQ/8BkE6s94K4VoYT4A=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
