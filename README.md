@@ -1,5 +1,3 @@
-**This repo has now been archived as Runalyze now has [native support for syncing with Oura](https://blog.runalyze.com/features/sync-with-oura/).**
-
 # Oura to Runalyze
 
 ![Tests Status Badge](https://github.com/lildude/oura-to-runalyze/workflows/Tests/badge.svg)
