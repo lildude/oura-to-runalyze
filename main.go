@@ -75,6 +75,8 @@ func createMetrics(sleeps []oura.Sleep) runalyze.Metrics {
 			LightSleepDuration: secToMin(s.Light),
 			DeepSleepDuration:  secToMin(s.Deep),
 			AwakeDuration:      secToMin(s.Awake),
+			HrAverage:          int(s.HrAverage),
+			HrLowest:           int(s.HrLowest),
 			Quality:            int(s.Score / 10),
 		})
 

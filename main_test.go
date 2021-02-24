@@ -128,6 +128,7 @@ func Test_createMetrics(t *testing.T) {
 			Deep:         2910,
 			Awake:        1230,
 			Score:        85,
+			HrAverage:    60,
 			HrLowest:     49,
 		},
 	}
@@ -140,6 +141,8 @@ func Test_createMetrics(t *testing.T) {
 				LightSleepDuration: 171,
 				DeepSleepDuration:  49,
 				AwakeDuration:      21,
+				HrAverage:          60,
+				HrLowest:           49,
 				Quality:            8,
 			},
 		},
