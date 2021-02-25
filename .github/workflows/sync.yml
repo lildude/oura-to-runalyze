@@ -14,3 +14,6 @@ jobs:
       - run: |
           go install github.com/lildude/oura-to-runalyze@latest
           oura-to-runalyze -yesterday
+        env:
+          OURA_ACCESS_TOKEN: ${{ secrets.OURA_ACCESS_TOKEN }}
+          RUNALYZE_ACCESS_TOKEN: ${{ secrets.RUNALYZE_ACCESS_TOKEN }}
