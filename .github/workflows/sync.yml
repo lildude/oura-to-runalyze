@@ -1,0 +1,16 @@
+name: Syncher
+
+on:
+  schedule:
+    - cron: 0 12 * * *
+
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.15'
+      - run: |
+          go install github.com/lildude/oura-to-runalyze@latest
+          oura-to-runalyze -yesterday
