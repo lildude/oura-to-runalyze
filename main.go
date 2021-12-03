@@ -82,7 +82,7 @@ func createMetrics(sleeps []oura.Sleep) runalyze.Metrics {
 
 		hrRest = append(hrRest, runalyze.HeartRateRest{
 			DateTime:  s.BedtimeEnd,
-			HeartRate: s.HrLowest,
+			HeartRate: int(s.HrLowest),
 		})
 	}
 
