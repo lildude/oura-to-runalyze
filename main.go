@@ -1,5 +1,7 @@
 package main
 
+//go:generate oapi-codegen --package=main -generate=types -o ./oura.gen.go https://cloud.ouraring.com/v2/static/json/openapi.json
+
 import (
 	"context"
 	"flag"
@@ -8,7 +10,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/joho/godotenv"
+	// Autoloads .env file to supply environment variables
+	_ "github.com/joho/godotenv/autoload"
+
 	"github.com/lildude/oura"
 	"github.com/lildude/runalyze"
 	"golang.org/x/oauth2"
@@ -21,7 +25,6 @@ var (
 )
 
 func main() {
-	godotenv.Load(".env")
 	flag.StringVar(&start, "start", "", "Start date in the format: YYYY-MM-DD. If not provided, defaults to Oura's default of one week ago.")
 	flag.StringVar(&end, "end", "", "End date in the form: YYYY-MM-DD. If not provided, defaults to Oura's default of today.")
 	flag.BoolVar(&yesterday, "yesterday", false, "Use yesterday's date as the start date.")
@@ -50,7 +53,7 @@ func main() {
 	ouraClient := newOuraClient()
 	sleeps, err := getOuraSleep(ouraClient, start, end)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Problem uploading metrics to Runalyze: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Problem getting sleep data from Oura: %v\n", err)
 		os.Exit(1)
 	}
 	metrics := createMetrics(*sleeps)
