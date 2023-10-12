@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> This project has been archived as Runalyze now has a direct Oura integration
+
+---
+
 # Oura to Runalyze
 
 ![Tests Status Badge](https://github.com/lildude/oura-to-runalyze/workflows/Tests/badge.svg)
